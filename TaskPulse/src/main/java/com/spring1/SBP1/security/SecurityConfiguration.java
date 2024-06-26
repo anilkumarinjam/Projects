@@ -19,16 +19,16 @@ public class SecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
     	
-    	Function<String, String> encoder = input -> passwordEncoder().encode(input);
+    	//Function<String, String> encoder = input -> passwordEncoder().encode(input);
 		
-    	UserDetails user = User.builder().passwordEncoder(encoder)
+    	UserDetails user = User.builder()
             .username("Anil")
-            .password("Anil")
+            .password(passwordEncoder().encode("Anil"))
             .roles("USER")
             .build();
-    	UserDetails user1 = User.builder().passwordEncoder(encoder)
+    	UserDetails user1 = User.builder()
                 .username("Praveen")
-                .password("Praveen")
+                .password(passwordEncoder().encode("Praveen"))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user,user1);
